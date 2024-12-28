@@ -3,6 +3,7 @@ import React from "react";
 
 import Question from "./question";
 import AnswerButton from "./answerbutton";
+import FetchData from "./fetchdata";
 const RandomizeArray = (correctAnswer, wrongAnswers) => {
   // Create an array of objects with text and boolean
   const result = [

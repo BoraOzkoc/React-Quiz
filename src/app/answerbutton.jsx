@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 
-const AnswerButton = ({ text, isCorrectAnswer}) => {
-  const [isDisabled, setIsDisabled] = useState(false);
-
+const AnswerButton = ({ text, isCorrectAnswer, onClick }) => {
   const handleClick = () => {
-    setIsDisabled(true); // Disable the button
-    if (onClick) {
-      if (isCorrectAnswer) {
-        console.log("correct answer");
-      }
+    if (isCorrectAnswer) {
+      console.log("Correct answer");
     }
+    onClick(); // Call the passed function to go to the next question
   };
 
   return (
     <div className="border">
-      <button onClick={handleClick} disabled={isDisabled}>
-        {text}
-      </button>
+      <button onClick={handleClick}>{text}</button>
     </div>
   );
 };
