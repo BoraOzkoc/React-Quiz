@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-
-const AnswerButton = ({ text, isCorrectAnswer, onClick }) => {
+import he from "he"
+const AnswerButton = ({
+  text,
+  isCorrectAnswer,
+  onClick,
+  increaseCorrectAmount,
+}) => {
   const handleClick = () => {
     if (isCorrectAnswer) {
-      console.log("Correct answer");
+      increaseCorrectAmount();
+    } else {
     }
-    onClick(); // Call the passed function to go to the next question
+    onClick();
   };
 
   return (
-    <div className="border">
-      <button onClick={handleClick}>{text}</button>
-    </div>
+    <button
+      onClick={handleClick}
+      className={`px-4 py-2 m-2 min-w-[320px] rounded bg-[#46A57D] hover:bg-[#2c6950] text-white"
+      `}
+    >
+      {he.decode(text)}
+    </button>
   );
 };
 

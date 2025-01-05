@@ -1,27 +1,41 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import AnswerButton from "./answerbutton";
-
+import QuizTemplate from "./quiztemplate";
+import Results from "./results";
+import getQuestions from "./getQuestions";
+import EntryPage from "./entrypage";
 const FetchData = () => {
   const [items, setItems] = useState([]);
   const [dataIsLoaded, setDataIsLoaded] = useState(false);
   const [count, setCount] = useState(0); // To track the current question
-
+  const [correctAmount, setCorrectAmount] = useState(0);
+  const [isFirstPage, setPage] = useState(true);
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setItems(json.results); // Store only the questions
-        setDataIsLoaded(true);
-      });
+    fetchQuestions();
+    setPage(true);
   }, []);
+
+  async function fetchQuestions() {
+    setDataIsLoaded(false);
+    let results = await getQuestions();
+
+    setItems(results); // Store only the questions
+    setDataIsLoaded(true);
+  }
 
   // Function to go to the next question
   const handleNextQuestion = () => {
-    setCount((prevCount) => prevCount + 1); // Increment the count
+    setCount((prevCount) => prevCount + 1);
   };
-
+  const resetQuiz = () => {
+    setCount(0);
+    setCorrectAmount(0);
+    fetchQuestions();
+    setPage(true);
+  };
+  const incrementCorrectAmount = () => {
+    setCorrectAmount((prevCount) => (prevCount += 1));
+  };
   if (!dataIsLoaded) {
     return (
       <div>
@@ -29,31 +43,30 @@ const FetchData = () => {
       </div>
     );
   }
-
+const nextpage=() =>{
+    setPage(false);
+}
   // Get the current question and answers
   const currentQuestion = items[count];
-  const answers = [
-    { text: currentQuestion.correct_answer, isCorrect: true },
-    ...currentQuestion.incorrect_answers.map((answer) => ({
-      text: answer,
-      isCorrect: false,
-    })),
-  ].sort(() => Math.random() - 0.5); // Randomize answers
 
   return (
     <div className="App">
-      <div className="container">
-        <h2>Question {count + 1}</h2>
-        <p>{currentQuestion.question}</p>
-        <div className="flex justify-between items-center ">
-          {answers.map((answer, index) => (
-            <AnswerButton
-              key={index}
-              text={answer.text}
-              isCorrectAnswer={answer.isCorrect}
-              onClick={handleNextQuestion} // Pass the function to increment count
+      <div className="container ">
+        <div>
+          {isFirstPage ? (
+            <EntryPage onClick={nextpage} />
+          ) : count <= 9 ? (
+            <QuizTemplate
+              count={count}
+              question={currentQuestion.question}
+              correctAnswer={currentQuestion.correct_answer}
+              wrongAnswers={currentQuestion.incorrect_answers}
+              handleAnswerClick={handleNextQuestion}
+              incrementCorrectAmount={incrementCorrectAmount}
             />
-          ))}
+          ) : (
+            <Results correctNumber={correctAmount} handleClick={resetQuiz} />
+          )}
         </div>
       </div>
     </div>

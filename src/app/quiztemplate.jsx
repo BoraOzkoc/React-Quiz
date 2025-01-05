@@ -1,9 +1,7 @@
-import useState from "react";
 import React from "react";
 
 import Question from "./question";
 import AnswerButton from "./answerbutton";
-import FetchData from "./fetchdata";
 const RandomizeArray = (correctAnswer, wrongAnswers) => {
   // Create an array of objects with text and boolean
   const result = [
@@ -16,26 +14,32 @@ const RandomizeArray = (correctAnswer, wrongAnswers) => {
 
   return randomizedResult;
 };
-const QuestionTemplate = ({ question, correctAnswer, wrongAnswers }) => {
-  // const handleAnswerClick = (selectedAnswer) => {
-  //   console.log(`Selected answer: ${selectedAnswer}`);
-  // };
+const QuestionTemplate = ({
+  count,
+  question,
+  correctAnswer,
+  wrongAnswers,
+  handleAnswerClick,
+  incrementCorrectAmount
+}) => {
   const randomizedArray = RandomizeArray(correctAnswer, wrongAnswers);
 
   return (
-    <div>
-      {/* Render the question */}
-      <Question questionText={question} />
+    <div className=" flex flex-col items-center justify-between">
+      <h2 className="bg-[#D0E5D9] rounded font-bold text-[#010101] text-center">Question-{count + 1}</h2>
+      <div className=" flex items-center justify-between">
+        <Question questionText={question} />
+      </div>
 
-      {/* Render the answer buttons */}
       <div>
-        <div className=" flex items-center justify-between">
+        <div className=" flex flex-col items-center justify-between">
           {randomizedArray.map((answer, key) => (
             <AnswerButton
               key={key} // Add a unique key prop here
               text={answer.text}
               isCorrectAnswer={answer.isCorrect}
-              onClick={() => handleAnswerClick(answer)}
+              onClick={() => handleAnswerClick()}
+              increaseCorrectAmount={incrementCorrectAmount}
             />
           ))}
         </div>
