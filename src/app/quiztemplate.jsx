@@ -26,7 +26,7 @@ const QuestionTemplate = ({
 
   return (
     <div className=" flex flex-col items-center justify-between">
-      <h2 className="bg-[#D0E5D9] rounded font-bold text-[#010101] text-center">Question-{count + 1}</h2>
+      <h2 className="bg-[#D0E5D9] rounded font-bold text-[#010101] p-2 text-center">Question-{count + 1}</h2>
       <div className=" flex items-center justify-between">
         <Question questionText={question} />
       </div>
