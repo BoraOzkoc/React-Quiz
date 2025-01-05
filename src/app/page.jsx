@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React from "react";
 import Data from "./fetchdata";
-import QuizTemplate from "./quiztemplate";
 
 export default function Home() {
   return (
