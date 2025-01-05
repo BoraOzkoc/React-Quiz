@@ -7,14 +7,14 @@ const Results = ({ correctNumber, handleClick }) => {
   };
   calculateResults();
   return (
-    <div>
-      <h2 className=" text-white rounded-lg flex justify-center text-3xl">
+    <div className="flex flex-col justify-center items-center">
+      <h2 className=" w-fit text-white rounded-lg font-bold flex justify-center text-3xl">
         Results
       </h2>
-      <h3 className="p-6 flex justify-center text-lg">{correctNumber}/10</h3>
+      <h3 className="p-6 font-bold flex justify-center text-lg">{correctNumber}/10</h3>
       <button
         onClick={handleClick}
-        className={`px-4 py-2 m-2 min-w-[320px] font-bold rounded bg-[#F8773F] hover:bg-[#b2542c] text-white"
+        className={`px-4 py-2 m-2 min-w-[320px] w-fit font-bold rounded bg-[#46A57D] hover:bg-[#46cd95] text-white"
         `}
       >
         Play Again
