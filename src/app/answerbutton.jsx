@@ -17,7 +17,7 @@ const AnswerButton = ({
   return (
     <button
       onClick={handleClick}
-      className={`px-4 py-2 m-2 min-w-[320px] rounded bg-[#46A57D] hover:bg-[#4ad299] text-white"
+      className={`px-4 py-2 my-2 min-w-[320px] rounded-lg bg-[#46A57D] hover:bg-[#4ad299] text-white"
       `}
     >
       {he.decode(text)}

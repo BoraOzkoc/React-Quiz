@@ -1,19 +1,14 @@
-// export function getQuestions() {
-//   fetch("https://opentdb.com/api.php?amount=10&type=multiple")
-//     .then((res) => res.json())
-//     .then((json) => {
-//       return json.results;
-//     });
-// }
 const getQuestions = async () => {
-  const endpoint = `https://opentdb.com/api.php?amount=10&type=multiple`;
-  const response = await (await fetch(endpoint)).json();
+  try {
+    const endpoint = `https://opentdb.com/api.php?amount=10&type=multiple`;
+    const response = await fetch(endpoint);
+    const data = await response.json();
 
-  if (response.results) {
-    return await response.results
-  } else {
-    return await response.result
+    return data.results;
+  } catch (error) {
+    console.error("Error fetching questions:", error);
+    return []; // Return an empty array if there’s an error
   }
-
 };
-export default getQuestions
+
+export default getQuestions;

@@ -16,11 +16,25 @@ const FetchData = () => {
   }, []);
 
   async function fetchQuestions() {
-    setDataIsLoaded(false);
-    let results = await getQuestions();
-
-    setItems(results); // Store only the questions
-    setDataIsLoaded(true);
+    setDataIsLoaded(false); // Mark the data as not loaded initially
+  
+    try {
+      let results = await getQuestions();
+  
+      // Check if results is undefined
+      if (results === undefined) {
+        await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
+        return fetchQuestions(); // Retry fetching the data
+      }
+  
+      setItems(results); // Store the questions
+      setDataIsLoaded(true); // Mark data as loaded
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+      console.error("Retrying in 5 seconds...");
+      await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
+      return fetchQuestions(); // Retry fetching the data
+    }
   }
 
   // Function to go to the next question

@@ -7,7 +7,7 @@ const EntryPage = ({ onClick }) => {
         Take on this fun 10-question trivia quiz and see how many you can get
         right. Ready to find out your final score at the end? Let’s get started!
       </p>
-      <button className=" font-bold w-1/4 border rounded-2xl border-[#46A57D] hover:bg-[#46A57D] p-3" onClick={onClick}>
+      <button className="  font-bold w-1/4 min-w-[320px] border rounded-2xl border-[#46A57D] hover:bg-[#46A57D] p-3" onClick={onClick}>
         Start Game
       </button>
     </div>
