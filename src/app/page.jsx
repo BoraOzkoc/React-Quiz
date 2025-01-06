@@ -40,7 +40,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Github →
+          Github 
         </a>
       </footer>
     </div>
