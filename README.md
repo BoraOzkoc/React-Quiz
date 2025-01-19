@@ -1,4 +1,4 @@
-# Trivia Quest
+# Trivia Quiz
 
 A modern, interactive trivia quiz game built with React, Javascript Next.js and Tailwind CSS. Challenge yourself with random quiz categories and test your knowledge in this engaging web application.
 
@@ -26,10 +26,6 @@ Run the development server:
     npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to start playing.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Tech Stack
 
